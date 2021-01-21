@@ -1,0 +1,64 @@
+def simplify(numerator, denominator):
+    #find greatest common divisor for numerator and denominator, except 1:
+    commonFactor = 1
+    for i in range(min(abs(numerator), abs(denominator)), 1, -1):
+        if numerator % i == 0 and denominator % i == 0:
+            commonFactor = i
+            break
+
+    return str(int(numerator) / commonFactor) + '/' + str(int(denominator) / commonFactor)
+
+def convertToFraction(num, repeatedValue):
+    integer, decimal = num.split('.')[0], num.split('.')[1]
+
+    #Identify what place the repeating decimal begins
+    place = 0
+    for i in range(len(decimal)):
+        if decimal[i:i+len(repeatedValue)] == repeatedValue:
+            break
+        else:
+            place += 1
+
+    # Build the non-repeating part of the number
+    nonRepeat = integer + '.' + decimal[:place]
+
+    # Build the repeating part of the number, but only repeat once
+    repeat = '0.'
+    for i in range(place):
+        repeat += '0'
+
+    repeat += repeatedValue
+
+    # Build the nines
+    nines = ''
+    for i in range(len(repeatedValue)):
+        nines += '9'
+
+    # Build the multiple of ten
+    powersOfTen = '1'
+    for i in range(place):
+        powersOfTen += '0'
+
+
+    numerator = str(float(nonRepeat) * int(powersOfTen) * int(nines) * 10**(place) + int(repeatedValue) * int(powersOfTen))
+    denominator = str(int(nines) * 10**(place) * int(powersOfTen))
+
+    return numerator, denominator
+
+    
+def main():
+    #num = input('Enter decimal to convert to a fraction  If there is a repeating pattern, repeat the pattern twice times: ')
+    #repeatedValue = input('Enter the repeating part of the decimal as an integer (e.g. 0.00671671671 would be entered as 671): ')
+
+    num = '125.4122671671'
+    repeatedValue = '671'
+    
+    nume, den = convertToFraction(num, repeatedValue)
+    
+    fraction = simplify(float(nume), int(den))
+
+    print(num + ' written as a fraction is ' + fraction)
+    
+
+if __name__ == "__main__":
+    main()
