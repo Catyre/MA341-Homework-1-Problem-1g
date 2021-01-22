@@ -47,11 +47,8 @@ def convertToFraction(num, repeatedValue):
 
     
 def main():
-    #num = input('Enter decimal to convert to a fraction  If there is a repeating pattern, repeat the pattern twice times: ')
-    #repeatedValue = input('Enter the repeating part of the decimal as an integer (e.g. 0.00671671671 would be entered as 671): ')
-
-    num = '125.4122671671'
-    repeatedValue = '671'
+    num = input('Enter decimal to convert to a fraction  If there is a repeating pattern, repeat the pattern twice times: ')
+    repeatedValue = input('Enter the repeating part of the decimal as an integer (e.g. 0.00671671671 would be entered as 671): ')
     
     nume, den = convertToFraction(num, repeatedValue)
     
